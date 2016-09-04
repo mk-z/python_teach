@@ -2,10 +2,7 @@
 
 from event import events_list
 
-def run(tasks):
-    for task in tasks:
-        _next(task)
-
+def run():
     while len(events_list):
         for event in events_list:
             if event.is_ready():

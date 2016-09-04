@@ -1,5 +1,6 @@
 
 from event import Event
+from future import Future
 from time import time
 
 class SleepEvent(Event):
@@ -13,4 +14,7 @@ class SleepEvent(Event):
         return time() - self.start_time >= self.timeout
 
 def sleep(timeout):
-    return SleepEvent(timeout)
+    future = Future()
+    event = SleepEvent(timeout)
+    event.set_callback(lambda: future.done())
+    return future
